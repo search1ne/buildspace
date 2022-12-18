@@ -11,7 +11,7 @@ contract WavePortal {
     uint256 totalWaves;
 
     constructor() {
-        console.log("a web 3 alchemist. journey into decentralization");
+        console.log("An alchemist journey into web3");
     }
 
     function wave() public {
@@ -21,8 +21,8 @@ contract WavePortal {
     }
 
     function getWaveCount(address _address) public view returns (uint) {
+        console.log("%s has waved %d times!", _address, waveCounts[_address]);
         return waveCounts[_address];
-
     }
     
     function getTotalWaves() public view returns (uint256) {

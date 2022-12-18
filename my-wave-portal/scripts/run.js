@@ -9,22 +9,31 @@ const main = async () => {
   
     await waveContract.getTotalWaves();
     
-    const senderAddresses = []
-    const firstWaveTxn = await waveContract.wave();
-    senderAddresses.push(firstWaveTxn.sender);
-    await firstWaveTxn.wait();
+    const senderAddresses = []; // Store the senders' addresses to check later
 
-  
-    await waveContract.getTotalWaves();
-  
-    const secondWaveTxn = await waveContract.connect(randomPerson).wave();
-    senderAddresses.push(secondWaveTxn.sender);    
-    await secondWaveTxn.wait();
+    let waveTxn = await waveContract.connect(owner).wave();  // Call the wave function
+    senderAddresses.push(waveTxn.sender); // Add the sender's address to the array
+    await waveTxn.wait(); // wait for the transaction to be mined
 
     const waveCount = await waveContract.getWaveCount(owner.address);
     console.log(`Number of waves made by contract owner: ${waveCount}`)
   
     await waveContract.getTotalWaves();
+
+    /*
+    const firstWaveTxn = await waveContract.connect(owner).wave();
+    senderAddresses.push(firstWaveTxn.sender);
+    await firstWaveTxn.wait();
+
+  
+   await waveContract.getTotalWaves();
+  
+    const secondWaveTxn = await waveContract.connect(randomPerson).wave();
+    senderAddresses.push(secondWaveTxn.sender);    
+    await secondWaveTxn.wait();
+    */
+
+
 
   };
 
